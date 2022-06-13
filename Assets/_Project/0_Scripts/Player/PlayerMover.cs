@@ -17,7 +17,7 @@ namespace MB
 
         void FixedUpdate()
         {
-            var moveVector = InputProvider.MoveVector();
+            var moveVector = InputProvider.Intance.MoveVector();
             _rigidbody.AddForce(moveVector * _moveSpeed);
         }
     }
