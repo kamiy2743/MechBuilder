@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MB
 {
-    public class InputProvider
+    public class InputProvider : IInputProvider
     {
         public static InputProvider Intance => _intance;
         private static InputProvider _intance = new InputProvider();
@@ -14,6 +14,11 @@ namespace MB
         public Vector3 MoveVector()
         {
             return _input.MoveVector();
+        }
+
+        public bool Jump()
+        {
+            return _input.Jump();
         }
     }
 }

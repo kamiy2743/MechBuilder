@@ -19,5 +19,10 @@ namespace MB
             var moveVectorV2 = _actions.Player.Move.ReadValue<Vector2>();
             return new Vector3(moveVectorV2.x, 0, moveVectorV2.y);
         }
+
+        public bool Jump()
+        {
+            return _actions.Player.Jump.ReadValue<float>() > 0;
+        }
     }
 }

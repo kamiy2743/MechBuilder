@@ -8,6 +8,7 @@ namespace MB
     {
         [SerializeField] private float _acceleration;
         [SerializeField] private float _maxSpeed;
+        [SerializeField] private float _jumpForce;
 
         private Rigidbody _rigidbody;
         private Transform _camera;
@@ -21,11 +22,13 @@ namespace MB
         void FixedUpdate()
         {
             Move();
+            Jump();
         }
 
         public void Move()
         {
             var moveDirection = MoveDirection();
+            if (moveDirection == Vector3.zero) return;
 
             var currentSpeed = _rigidbody.velocity.magnitude;
             var force = moveDirection * _acceleration * Mathf.Abs(_maxSpeed - currentSpeed);
@@ -41,6 +44,14 @@ namespace MB
             var moveRotation = Quaternion.Euler(0, angle, 0);
 
             return moveRotation * moveVector;
+        }
+
+        private void Jump()
+        {
+            var isPushed = InputProvider.Intance.Jump();
+            if (!isPushed) return;
+
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
 }
