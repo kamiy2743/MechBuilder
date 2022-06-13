@@ -13,6 +13,10 @@ namespace MB
         [SerializeField] private float _jumpForce;
         [SerializeField] private GroundCheck _groundCheck;
 
+        [Space(20)]
+        [SerializeField] private float _defaultGravity;
+        [SerializeField] private float _inAirGravity;
+
         private Rigidbody _rigidbody;
         private Transform _camera;
 
@@ -20,12 +24,15 @@ namespace MB
         {
             _rigidbody = GetComponent<Rigidbody>();
             _camera = Camera.main.transform;
+
+            _rigidbody.useGravity = false;
         }
 
         void FixedUpdate()
         {
             Move();
             Jump();
+            Gravity();
         }
 
         public void Move()
@@ -33,7 +40,7 @@ namespace MB
             var moveDirection = MoveDirection();
             if (moveDirection == Vector3.zero) return;
 
-            var currentSpeed = _rigidbody.velocity.magnitude;
+            var currentSpeed = Vector3.ProjectOnPlane(_rigidbody.velocity, Vector3.up).magnitude;
             var force = moveDirection * _acceleration * Mathf.Abs(_maxSpeed - currentSpeed);
             _rigidbody.AddForce(force);
         }
@@ -57,6 +64,18 @@ namespace MB
             if (!isPushed) return;
 
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        }
+
+        private void Gravity()
+        {
+            if (_groundCheck.Triggered)
+            {
+                _rigidbody.AddForce(Vector3.down * _defaultGravity, ForceMode.Acceleration);
+            }
+            else
+            {
+                _rigidbody.AddForce(Vector3.down * _inAirGravity, ForceMode.Acceleration);
+            }
         }
     }
 }
