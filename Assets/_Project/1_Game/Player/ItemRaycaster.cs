@@ -11,6 +11,8 @@ namespace MB
         private Transform _camera;
         private int _layerMask;
 
+        private PlaceableItemRaycastReceiver _placeableItemRaycastReceiver;
+
         public void StaticAwake()
         {
             _camera = Camera.main.transform;
@@ -27,6 +29,14 @@ namespace MB
             else
             {
                 Debug.DrawRay(_camera.position, _camera.TransformDirection(Vector3.forward) * _maxDistance, Color.yellow);
+                return;
+            }
+
+            var item = hit.collider.GetComponent<IItem>();
+
+            if (item is IPlaceableItem)
+            {
+                _placeableItemRaycastReceiver.Hit(hit);
             }
         }
     }
