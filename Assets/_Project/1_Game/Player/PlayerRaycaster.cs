@@ -17,7 +17,7 @@ namespace MB
         {
             _camera = Camera.main.transform;
 
-            _processores[RaycasterState.PlaceItem] = new PlacableItemPlacer();
+            _processores[RaycasterState.PlaceItem] = new ItemPlacer();
             SetState(default);
         }
 
