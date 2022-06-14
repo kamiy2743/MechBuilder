@@ -551,8 +551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxDistance: 5
-  _camera: {fileID: 0}
-  _layerMask: 0
 --- !u!1 &733783997
 GameObject:
   m_ObjectHideFlags: 0

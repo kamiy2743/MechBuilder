@@ -1,6 +1,6 @@
 namespace MB
 {
-    public interface IItem : IRaycastReceiver
+    public interface IItem
     {
         string Name { get; }
     }
