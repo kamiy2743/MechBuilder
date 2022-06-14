@@ -9,7 +9,7 @@ namespace MB
         public void Hit(RaycastHit hit)
         {
             var item = hit.collider.GetComponent<IPlaceableItem>();
-            Debug.Log(item.Name);
+            Debug.Log(hit.normal);
         }
     }
 }

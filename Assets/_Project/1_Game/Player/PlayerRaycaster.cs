@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace MB
 {
-    public class ItemRaycaster : MonoBehaviour, IStaticAwake
+    public class PlayerRaycaster : MonoBehaviour, IStaticAwake
     {
         [SerializeField] private float _maxDistance;
 
         private Transform _camera;
         private int _layerMask;
 
-        private PlaceableItemRaycastReceiver _placeableItemRaycastReceiver;
+        private PlaceableItemRaycastReceiver _placeableItemRaycastReceiver = new PlaceableItemRaycastReceiver();
 
         public void StaticAwake()
         {
@@ -32,11 +32,9 @@ namespace MB
                 return;
             }
 
-            var item = hit.collider.GetComponent<IItem>();
-
-            if (item is IPlaceableItem)
+            if (hit.collider.TryGetComponent(out IRaycastReceiver receiver))
             {
-                _placeableItemRaycastReceiver.Hit(hit);
+                receiver.Hit(hit);
             }
         }
     }
