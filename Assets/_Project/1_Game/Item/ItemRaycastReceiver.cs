@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace MB
 {
-    public class PlaceableItemRaycastReceiver : IRaycastReceiver
+    public class ItemRaycastReceiver : IRaycastReceiver
     {
         public void Hit(RaycastHit hit)
         {
-            var item = hit.collider.GetComponent<IPlaceableItem>();
             Debug.Log(hit.normal);
         }
     }

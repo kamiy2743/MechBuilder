@@ -11,7 +11,7 @@ namespace MB
         private Transform _camera;
         private int _layerMask;
 
-        private PlaceableItemRaycastReceiver _placeableItemRaycastReceiver = new PlaceableItemRaycastReceiver();
+        private ItemRaycastReceiver _placeableItemRaycastReceiver = new ItemRaycastReceiver();
 
         public void StaticAwake()
         {

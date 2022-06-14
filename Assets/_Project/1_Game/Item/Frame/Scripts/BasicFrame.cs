@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace MB
 {
-    public class BasicFrame : MonoBehaviour, IFrame
+    public class BasicFrame : MonoBehaviour, IItem, IRaycastReceiver
     {
         public string Name { get; private set; } = "BasicFrame";
 
-        private PlaceableItemRaycastReceiver _placeableItemRaycastReceiver = new PlaceableItemRaycastReceiver();
+        private ItemRaycastReceiver _placeableItemRaycastReceiver = new ItemRaycastReceiver();
 
         public void Hit(RaycastHit hit)
         {
