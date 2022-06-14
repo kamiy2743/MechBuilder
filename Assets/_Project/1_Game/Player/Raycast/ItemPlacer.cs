@@ -13,7 +13,8 @@ namespace MB
 
         public void Hit(RaycastHit hit)
         {
-            var other = hit.collider.GetComponent<IItem>();
+            var collider = hit.collider.GetComponent<ItemCollider>();
+            var other = collider.Parent;
             Preview(hit, other);
         }
 
