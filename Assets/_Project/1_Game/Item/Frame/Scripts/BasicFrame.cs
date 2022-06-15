@@ -25,15 +25,5 @@ namespace MB
             _mf = this.gameObject.GetComponentInSelfOrChildren<MeshFilter>("meshfilter not found");
             _mr = this.gameObject.GetComponentInSelfOrChildren<MeshRenderer>("meshrenderer not found");
         }
-
-        public void SetActive(bool value)
-        {
-            SetActive(value);
-        }
-
-        public void SetParent(Transform parent)
-        {
-            transform.SetParent(parent);
-        }
     }
 }
