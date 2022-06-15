@@ -8,46 +8,32 @@ namespace MB
     {
         [SerializeField] private OriginalItemsConfig _config;
 
-        private OriginalItem[] _originalItems;
+        private IFieldItem[] _originalItems;
 
         public void StaticAwake()
         {
-            var originalItems = new List<OriginalItem>();
-            for (int i = 0; i < _config.ItemObjects.Length; i++)
+            var originalItems = new List<IFieldItem>();
+
+            for (int i = 0; i < _config.Prefabs.Length; i++)
             {
-                var itemObject = _config.ItemObjects[i];
-                if (!itemObject.GameObject.TryGetComponent(out IItem _))
+                var prefab = _config.Prefabs[i];
+                if (!prefab.GameObject.TryGetComponent(out IFieldItem _))
                 {
-                    Debug.LogError("Itemじゃない");
+                    Debug.LogError("IFieldItemじゃない");
                     continue;
                 }
 
-                var go = Instantiate(itemObject.GameObject);
-                go.SetActive(false);
-                go.transform.SetParent(this.transform);
+                var originalItem =
+                    Instantiate(prefab.GameObject, parent: this.transform)
+                    .GetComponent<IFieldItem>();
 
-                var item = go.GetComponent<IItem>();
-                var itemID = new ItemID(i);
-                var name = itemObject.Name;
-                item.Initialize(itemID, name);
+                originalItem.GameObject.SetActive(false);
+                originalItem.Initialize(new ItemID(i));
 
-                var originalItem = new OriginalItem(go, item);
                 originalItems.Add(originalItem);
             }
 
             _originalItems = originalItems.ToArray();
-        }
-
-        private class OriginalItem
-        {
-            public GameObject GameObject;
-            public IItem Item;
-
-            public OriginalItem(GameObject go, IItem item)
-            {
-                GameObject = go;
-                Item = item;
-            }
         }
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e8a40cfe14724419d1c8ef6ff1ce10, type: 3}
   m_Name: ItemPrefabsConfig
   m_EditorClassIdentifier: 
-  ItemObjects:
+  Prefabs:
   - Name: "\u57FA\u672C\u30D5\u30EC\u30FC\u30E0"
     GameObject: {fileID: 8646120657889050123, guid: b54e03a7768648a4dba265713ed6c7da, type: 3}
