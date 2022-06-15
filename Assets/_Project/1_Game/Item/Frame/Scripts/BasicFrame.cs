@@ -16,10 +16,10 @@ namespace MB
         private MeshFilter _mf;
         private MeshRenderer _mr;
 
-        public void Initialize(int itemID)
+        public void Initialize(int itemID, string name)
         {
             ID = itemID;
-            Name = nameof(BasicFrame);
+            Name = name;
 
             Collider = GetComponent<ItemCollider>();
             _mf = this.gameObject.GetComponentInSelfOrChildren<MeshFilter>("meshfilter not found");

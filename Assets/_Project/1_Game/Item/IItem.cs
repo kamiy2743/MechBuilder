@@ -11,6 +11,6 @@ namespace MB
         Mesh Mesh { get; }
         Material Material { get; }
 
-        void Initialize(int itemID);
+        void Initialize(int itemID, string name);
     }
 }

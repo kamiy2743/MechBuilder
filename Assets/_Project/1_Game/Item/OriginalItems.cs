@@ -15,7 +15,8 @@ namespace MB
             var originalItems = new List<IItem>();
             for (int i = 0; i < _config.ItemObjects.Length; i++)
             {
-                var obj = _config.ItemObjects[i];
+                var itemObject = _config.ItemObjects[i];
+                var obj = itemObject.Object;
                 if (!obj.TryGetComponent(out IItem _))
                 {
                     Debug.LogError("Itemじゃない");
@@ -28,7 +29,8 @@ namespace MB
 
                 var originalItem = originalObj.GetComponent<IItem>();
                 var itemID = i;
-                originalItem.Initialize(itemID);
+                var name = itemObject.Name;
+                originalItem.Initialize(itemID, name);
                 originalItems.Add(originalItem);
             }
 

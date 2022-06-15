@@ -8,6 +8,13 @@ namespace MB
     public class OriginalItemsConfig : ScriptableObject
     {
         [Header("並び順がItemIDになる")]
-        public GameObject[] ItemObjects;
+        public ItemObject[] ItemObjects;
+    }
+
+    [System.Serializable]
+    public class ItemObject
+    {
+        public string Name;
+        public GameObject Object;
     }
 }

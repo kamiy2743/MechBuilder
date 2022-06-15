@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ItemPrefabsConfig
   m_EditorClassIdentifier: 
   ItemObjects:
-  - {fileID: 8646120657889050123, guid: b54e03a7768648a4dba265713ed6c7da, type: 3}
+  - Name: "\u57FA\u672C\u30D5\u30EC\u30FC\u30E0"
+    Object: {fileID: 8646120657889050123, guid: b54e03a7768648a4dba265713ed6c7da, type: 3}
