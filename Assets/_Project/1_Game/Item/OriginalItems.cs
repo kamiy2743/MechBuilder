@@ -27,11 +27,28 @@ namespace MB
 
                 var itemID = new ItemID(i);
                 originalItem.Initialize(itemID);
+                originalItem.GameObject.name = prefab.GameObject.name;
                 originalItem.GameObject.SetActive(false);
 
                 _originalItems[itemID] = originalItem;
             }
 
+            Instantiate(new ItemID(0));
+        }
+
+        public IFieldItem Instantiate(ItemID itemID, Transform parent = null)
+        {
+            var originalItem = _originalItems[itemID];
+            var p = parent ??= this.transform.parent;
+
+            var item =
+                Instantiate(originalItem.GameObject, parent: p)
+                .GetComponent<IFieldItem>();
+
+            item.Initialize(itemID);
+            item.GameObject.SetActive(true);
+
+            return item;
         }
     }
 }
