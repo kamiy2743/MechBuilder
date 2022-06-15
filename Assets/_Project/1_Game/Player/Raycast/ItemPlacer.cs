@@ -13,8 +13,7 @@ namespace MB
 
         public void Hit(RaycastHit hit)
         {
-            var collider = hit.collider.GetComponent<ItemCollider>();
-            var other = collider.Parent;
+            var other = hit.collider.GetComponent<IItem>();
             Preview(hit, other);
         }
 
@@ -31,7 +30,7 @@ namespace MB
             var otherRotation = hit.collider.transform.rotation;
 
             _previewObject.SetVisible(true);
-            _previewObject.Transform.position = point + normal * 0.25f;
+            _previewObject.Transform.position = point + normal * (other.Collider.Size.x * other.Collider.Size.x);
             _previewObject.Transform.rotation = otherRotation;
         }
 
@@ -63,6 +62,7 @@ namespace MB
             {
                 _mf.mesh = other.Mesh;
                 _mr.material = other.Material;
+                Transform.localScale = Vector3.one * 0.5f;
             }
         }
     }

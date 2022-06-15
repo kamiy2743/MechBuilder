@@ -7,6 +7,7 @@ namespace MB
         int ID { get; }
         string Name { get; }
 
+        ItemCollider Collider { get; }
         Mesh Mesh { get; }
         Material Material { get; }
     }

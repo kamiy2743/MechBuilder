@@ -9,6 +9,7 @@ namespace MB
         public int ID { get; private set; } = 5;
         public string Name { get; private set; } = "BasicFrame";
 
+        public ItemCollider Collider { get; private set; }
         public Mesh Mesh => _mf.mesh;
         public Material Material => _mr.material;
 
@@ -17,6 +18,7 @@ namespace MB
 
         void Awake()
         {
+            Collider = GetComponent<ItemCollider>();
             _mf = this.gameObject.GetComponentInSelfOrChildren<MeshFilter>("meshfilter not found");
             _mr = this.gameObject.GetComponentInSelfOrChildren<MeshRenderer>("meshrenderer not found");
         }

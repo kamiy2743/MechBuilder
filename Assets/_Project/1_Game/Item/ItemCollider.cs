@@ -6,14 +6,12 @@ namespace MB
 {
     public class ItemCollider : MonoBehaviour
     {
-        public IItem Parent => _parent;
-        private IItem _parent;
+        public Vector3 Size => _collider.size;
 
         private BoxCollider _collider;
 
         void Awake()
         {
-            _parent = GetComponentInParent<IItem>();
             _collider = GetComponent<BoxCollider>();
         }
     }
