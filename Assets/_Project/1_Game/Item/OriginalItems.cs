@@ -8,12 +8,10 @@ namespace MB
     {
         [SerializeField] private OriginalItemsConfig _config;
 
-        private IFieldItem[] _originalItems;
+        private Dictionary<ItemID, IFieldItem> _originalItems = new Dictionary<ItemID, IFieldItem>();
 
         public void StaticAwake()
         {
-            var originalItems = new List<IFieldItem>();
-
             for (int i = 0; i < _config.Prefabs.Length; i++)
             {
                 var prefab = _config.Prefabs[i];
@@ -27,13 +25,13 @@ namespace MB
                     Instantiate(prefab.GameObject, parent: this.transform)
                     .GetComponent<IFieldItem>();
 
+                var itemID = new ItemID(i);
+                originalItem.Initialize(itemID);
                 originalItem.GameObject.SetActive(false);
-                originalItem.Initialize(new ItemID(i));
 
-                originalItems.Add(originalItem);
+                _originalItems[itemID] = originalItem;
             }
 
-            _originalItems = originalItems.ToArray();
         }
     }
 }
