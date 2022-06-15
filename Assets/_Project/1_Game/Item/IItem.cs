@@ -10,5 +10,7 @@ namespace MB
         ItemCollider Collider { get; }
         Mesh Mesh { get; }
         Material Material { get; }
+
+        void Initialize(int itemID);
     }
 }
