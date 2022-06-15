@@ -4,13 +4,13 @@ namespace MB
 {
     public interface IItem
     {
-        int ID { get; }
+        ItemID ID { get; }
         string Name { get; }
 
         ItemCollider Collider { get; }
         Mesh Mesh { get; }
         Material Material { get; }
 
-        void Initialize(int itemID, string name);
+        void Initialize(ItemID itemID, string name);
     }
 }

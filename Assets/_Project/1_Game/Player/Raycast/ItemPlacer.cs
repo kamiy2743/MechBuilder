@@ -8,7 +8,7 @@ namespace MB
     {
         public int LayerMask { get; private set; } = (1 << UnityEngine.LayerMask.NameToLayer("Item"));
 
-        private int _lastItemID;
+        private ItemID _lastItemID;
         private PreviewObject _previewObject = new PreviewObject();
 
         public void Hit(RaycastHit hit)

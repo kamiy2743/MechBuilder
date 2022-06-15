@@ -28,7 +28,7 @@ namespace MB
                 originalObj.transform.SetParent(this.transform);
 
                 var originalItem = originalObj.GetComponent<IItem>();
-                var itemID = i;
+                var itemID = new ItemID(i);
                 var name = itemObject.Name;
                 originalItem.Initialize(itemID, name);
                 originalItems.Add(originalItem);

@@ -6,7 +6,7 @@ namespace MB
 {
     public class BasicFrame : MonoBehaviour, IItem
     {
-        public int ID { get; private set; }
+        public ItemID ID { get; private set; }
         public string Name { get; private set; }
 
         public ItemCollider Collider { get; private set; }
@@ -16,7 +16,7 @@ namespace MB
         private MeshFilter _mf;
         private MeshRenderer _mr;
 
-        public void Initialize(int itemID, string name)
+        public void Initialize(ItemID itemID, string name)
         {
             ID = itemID;
             Name = name;
