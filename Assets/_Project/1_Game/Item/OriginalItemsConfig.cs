@@ -15,6 +15,6 @@ namespace MB
     public class ItemObject
     {
         public string Name;
-        public GameObject Object;
+        public GameObject GameObject;
     }
 }
