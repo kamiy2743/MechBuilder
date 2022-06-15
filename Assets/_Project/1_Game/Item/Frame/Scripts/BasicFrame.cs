@@ -4,24 +4,25 @@ using UnityEngine;
 
 namespace MB
 {
-    public class BasicFrame : MonoBehaviour, IItem
+    public class BasicFrame : MonoBehaviour, IFieldItem
     {
         public ItemID ID { get; private set; }
-        public string Name { get; private set; }
 
+        public GameObject GameObject => this.gameObject;
         public ItemCollider Collider { get; private set; }
+
         public Mesh Mesh => _mf.mesh;
         public Material Material => _mr.material;
 
         private MeshFilter _mf;
         private MeshRenderer _mr;
 
-        public void Initialize(ItemID itemID, string name)
+        public void Initialize(ItemID itemID)
         {
             ID = itemID;
-            Name = name;
 
             Collider = GetComponent<ItemCollider>();
+
             _mf = this.gameObject.GetComponentInSelfOrChildren<MeshFilter>("meshfilter not found");
             _mr = this.gameObject.GetComponentInSelfOrChildren<MeshRenderer>("meshrenderer not found");
         }

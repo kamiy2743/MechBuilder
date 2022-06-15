@@ -13,11 +13,11 @@ namespace MB
 
         public void Hit(RaycastHit hit)
         {
-            var other = hit.collider.GetComponent<IItem>();
+            var other = hit.collider.GetComponent<IFieldItem>();
             Preview(hit, other);
         }
 
-        private void Preview(RaycastHit hit, IItem other)
+        private void Preview(RaycastHit hit, IFieldItem other)
         {
             if (_lastItemID != other.ID)
             {
@@ -58,7 +58,7 @@ namespace MB
                 _mr.enabled = value;
             }
 
-            public void CopyMeshAndMaterial(IItem other)
+            public void CopyMeshAndMaterial(IFieldItem other)
             {
                 _mf.mesh = other.Mesh;
                 _mr.material = other.Material;
