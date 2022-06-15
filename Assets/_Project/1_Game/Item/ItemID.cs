@@ -1,6 +1,6 @@
 namespace MB
 {
-    public class ItemID : object
+    public struct ItemID
     {
         private static int _min = 0;
         private static int _max = 64;
@@ -24,6 +24,16 @@ namespace MB
         public override string ToString()
         {
             return _value.ToString();
+        }
+
+        public static bool operator ==(ItemID id1, ItemID id2)
+        {
+            return id1._value == id2._value;
+        }
+
+        public static bool operator !=(ItemID id1, ItemID id2)
+        {
+            return !(id1 == id2);
         }
     }
 }
