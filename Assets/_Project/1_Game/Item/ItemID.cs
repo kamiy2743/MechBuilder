@@ -1,11 +1,11 @@
 namespace MB
 {
-    public struct ItemID
+    public class ItemID
     {
-        private static int _min = 0;
-        private static int _max = 64;
+        private const int _min = 0;
+        private const int _max = 64;
 
-        private int _value;
+        private readonly int _value;
 
         public ItemID(int value)
         {

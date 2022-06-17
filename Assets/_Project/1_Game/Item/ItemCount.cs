@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct ItemCount
+public class ItemCount
 {
-    private static int _min = 0;
+    private const int _min = 0;
 
     public int Value { get; }
-    private int _max;
+    private readonly int _max;
 
-    public ItemCount(int value, int max)
+    private const int _defaultMax = 64;
+
+    public ItemCount(int value, int max = _defaultMax)
     {
         if (max <= _min)
         {
@@ -30,7 +32,7 @@ public struct ItemCount
         Value = value;
     }
 
-    public ItemCount(int max)
+    public ItemCount(int max = _defaultMax)
     {
         _max = max;
         Value = _min;
