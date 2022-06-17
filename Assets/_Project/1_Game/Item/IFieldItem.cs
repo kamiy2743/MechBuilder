@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MB
 {
-    public interface IFieldItem
+    public interface IFieldItem : IReadOnlyFieldItem
     {
         ItemID ID { get; }
 
