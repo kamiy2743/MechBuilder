@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace MB
 {
-    [CreateAssetMenu(fileName = "OriginalItemConfig", menuName = "ScriptableObjects/OriginalItemConfig")]
-    public class OriginalItemsConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "OriginalFieldItemsConfig", menuName = "ScriptableObjects/OriginalFieldItemsConfig")]
+    public class OriginalFieldItemsConfig : ScriptableObject
     {
         [Header("並び順がItemIDになる")]
         public ItemPrefab[] Prefabs;

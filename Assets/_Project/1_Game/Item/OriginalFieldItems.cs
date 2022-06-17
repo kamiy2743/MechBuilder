@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace MB
 {
-    public class OriginalItems : MonoBehaviour, IStaticAwake
+    public class OriginalFieldItems : MonoBehaviour, IStaticAwake
     {
-        [SerializeField] private OriginalItemsConfig _config;
+        [SerializeField] private OriginalFieldItemsConfig _config;
 
         private Dictionary<string, IFieldItem> _originalItems = new Dictionary<string, IFieldItem>();
 

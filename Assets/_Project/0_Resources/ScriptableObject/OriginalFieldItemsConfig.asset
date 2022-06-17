@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98e8a40cfe14724419d1c8ef6ff1ce10, type: 3}
-  m_Name: ItemPrefabsConfig
+  m_Name: OriginalFieldItemsConfig
   m_EditorClassIdentifier: 
   Prefabs:
   - Name: "\u57FA\u672C\u30D5\u30EC\u30FC\u30E0"
