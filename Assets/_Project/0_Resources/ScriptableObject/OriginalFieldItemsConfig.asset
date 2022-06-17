@@ -15,3 +15,5 @@ MonoBehaviour:
   Prefabs:
   - Name: "\u57FA\u672C\u30D5\u30EC\u30FC\u30E0"
     GameObject: {fileID: 8646120657889050123, guid: b54e03a7768648a4dba265713ed6c7da, type: 3}
+  - Name: "\u767A\u5C55\u30D5\u30EC\u30FC\u30E0"
+    GameObject: {fileID: 8646120657889050123, guid: b8b2dabd4953e0042a5db6c488654773, type: 3}
