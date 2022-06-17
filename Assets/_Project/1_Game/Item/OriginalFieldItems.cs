@@ -58,7 +58,7 @@ namespace MB
 
         public IReadOnlyFieldItem GetOriginalData(ItemID itemID)
         {
-            return (IReadOnlyFieldItem)_originalItems[itemID.ToString()];
+            return _originalItems[itemID.ToString()];
         }
 
         private IFieldItem Get(ItemID itemID)
