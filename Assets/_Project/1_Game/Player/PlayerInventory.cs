@@ -10,6 +10,8 @@ namespace MB
         [SerializeField] private InventorySlot _slotPrefab;
         [SerializeField] private Transform _slotParent;
 
+        public IInventoryItem ItemInHand => Get(0, 0);
+
         InventoryGrid _grid;
         private IInventoryItem[] _items;
         private InventorySlot[] _slots;
