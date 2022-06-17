@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MB
 {
-    public class BasicFrame : MonoBehaviour, IFieldItem
+    public class FieldItem : MonoBehaviour, IFieldItem
     {
         public ItemID ID { get; private set; }
 
