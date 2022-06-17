@@ -2,49 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemCount
+namespace MB
 {
-    private const int _min = 0;
-
-    public int Value { get; }
-    private readonly int _max;
-
-    private const int _defaultMax = 64;
-
-    public ItemCount(int value, int max = _defaultMax)
+    public class ItemCount
     {
-        if (max <= _min)
+        private const int _minValue = 0;
+
+        public int Value { get; }
+        private readonly int _maxValue;
+
+        private const int _defaultMaxValue = 64;
+
+        public static ItemCount Min = _min;
+        private static ItemCount _min = new ItemCount(_minValue);
+
+        public ItemCount(int value, int maxValue = _defaultMaxValue)
         {
-            throw new System.Exception("最大数が最小数以下です");
+            if (maxValue <= _minValue)
+            {
+                throw new System.Exception("最大数が最小数以下です");
+            }
+
+            _maxValue = maxValue;
+
+            if (value < _minValue)
+            {
+                throw new System.Exception("アイテム数が" + _minValue + "より小さいです");
+            }
+            if (value > maxValue)
+            {
+                throw new System.Exception("アイテム数が" + _maxValue + "より大きいです");
+            }
+
+            Value = value;
         }
 
-        _max = max;
-
-        if (value < _min)
+        public ItemCount(int maxValue = _defaultMaxValue)
         {
-            throw new System.Exception("アイテム数が" + _min + "より小さいです");
-        }
-        if (value > max)
-        {
-            throw new System.Exception("アイテム数が" + _max + "より大きいです");
+            _maxValue = maxValue;
+            Value = _minValue;
         }
 
-        Value = value;
-    }
+        public ItemCount Add(ItemCount add)
+        {
+            return new ItemCount(Value + add.Value, _maxValue);
+        }
 
-    public ItemCount(int max = _defaultMax)
-    {
-        _max = max;
-        Value = _min;
-    }
-
-    public ItemCount Add(ItemCount add)
-    {
-        return new ItemCount(Value + add.Value, _max);
-    }
-
-    public override string ToString()
-    {
-        return Value.ToString();
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }
