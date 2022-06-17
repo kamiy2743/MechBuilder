@@ -14,8 +14,13 @@ namespace MB
         private IInventoryItem[] _items;
         private InventorySlot[] _slots;
 
+        public static PlayerInventory Instance => _instance;
+        private static PlayerInventory _instance;
+
         public void StaticAwake()
         {
+            _instance = this;
+
             _grid = new InventoryGrid(4, 9);
             _items = new IInventoryItem[_grid.Count];
             _slots = new InventorySlot[_grid.Count];
