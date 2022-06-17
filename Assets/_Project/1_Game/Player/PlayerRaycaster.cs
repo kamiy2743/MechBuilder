@@ -6,17 +6,14 @@ namespace MB
 {
     public class PlayerRaycaster : MonoBehaviour, IStaticAwake
     {
+        [SerializeField] private Transform _mainCamera;
         [SerializeField] private float _maxDistance;
-
-        private Transform _camera;
 
         private Dictionary<RaycasterState, IRaycasterStateProcessor> _processores = new Dictionary<RaycasterState, IRaycasterStateProcessor>();
         private IRaycasterStateProcessor _currentProcessor;
 
         public void StaticAwake()
         {
-            _camera = Camera.main.transform;
-
             _processores[RaycasterState.PlaceItem] = new ItemPlacer();
             SetState(default);
         }
@@ -28,8 +25,8 @@ namespace MB
 
         void Update()
         {
-            var start = _camera.position;
-            var direction = _camera.TransformDirection(Vector3.forward);
+            var start = _mainCamera.position;
+            var direction = _mainCamera.TransformDirection(Vector3.forward);
             var layerMask = _currentProcessor.LayerMask;
 
             // Does the ray intersect any objects excluding the player layer

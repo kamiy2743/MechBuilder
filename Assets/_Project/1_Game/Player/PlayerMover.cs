@@ -6,6 +6,9 @@ namespace MB
 {
     public class PlayerMover : MonoBehaviour, IStaticAwake
     {
+        [SerializeField] private Transform _mainCamera;
+
+        [Space(20)]
         [SerializeField] private float _acceleration;
         [SerializeField] private float _maxSpeed;
 
@@ -18,12 +21,10 @@ namespace MB
         [SerializeField] private float _inAirGravity;
 
         private Rigidbody _rigidbody;
-        private Transform _camera;
 
         public void StaticAwake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _camera = Camera.main.transform;
 
             _rigidbody.useGravity = false;
         }
@@ -49,7 +50,7 @@ namespace MB
         {
             var moveVector = InputProvider.Intance.MoveVector();
 
-            var forward = Vector3.ProjectOnPlane(_camera.forward, Vector3.up);
+            var forward = Vector3.ProjectOnPlane(_mainCamera.forward, Vector3.up);
             var angle = Vector3.SignedAngle(Vector3.forward, forward, Vector3.up);
             var moveRotation = Quaternion.Euler(0, angle, 0);
 
