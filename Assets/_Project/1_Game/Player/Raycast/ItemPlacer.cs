@@ -19,18 +19,22 @@ namespace MB
 
         private void Preview(RaycastHit hit, IFieldItem other)
         {
+            var itemInhand = PlayerInventory.Instance.ItemInHand;
+            if (itemInhand == InventoryItem.Empty) return;
+
             if (_lastItemID != other.ID)
             {
                 _lastItemID = other.ID;
-                _previewObject.CopyMeshAndMaterial(other);
+                _previewObject.CopyMeshAndMaterial(itemInhand.ID);
             }
 
             var normal = hit.normal;
             var point = hit.point;
             var otherRotation = hit.collider.transform.rotation;
 
+            var originalItemInhand = OriginalFieldItems.Instance.GetOriginalData(itemInhand.ID);
             _previewObject.SetVisible(true);
-            _previewObject.Transform.position = point + normal * (other.Collider.Size.x * other.Collider.Size.x);
+            _previewObject.Transform.position = point + normal * (originalItemInhand.Collider.Size.x * other.Collider.Size.x);
             _previewObject.Transform.rotation = otherRotation;
         }
 
@@ -58,11 +62,13 @@ namespace MB
                 _mr.enabled = value;
             }
 
-            public void CopyMeshAndMaterial(IFieldItem other)
+            public void CopyMeshAndMaterial(ItemID itemID)
             {
-                Transform.localScale = other.Apperance.Scale;
-                _mf.mesh = other.Apperance.MeshFilter.mesh;
-                _mr.material = other.Apperance.MeshRenderer.material;
+                var originalItem = OriginalFieldItems.Instance.GetOriginalData(itemID);
+
+                Transform.localScale = originalItem.Apperance.Scale;
+                _mf.mesh = originalItem.Apperance.MeshFilter.mesh;
+                _mr.material = originalItem.Apperance.MeshRenderer.material;
             }
         }
     }
