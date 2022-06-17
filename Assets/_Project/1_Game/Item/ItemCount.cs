@@ -40,4 +40,9 @@ public struct ItemCount
     {
         return new ItemCount(Value + add.Value, _max);
     }
+
+    public override string ToString()
+    {
+        return Value.ToString();
+    }
 }
