@@ -7,13 +7,13 @@ namespace MB
     public class ItemCount
     {
         private const int _minValue = 0;
-
-        public int Value { get; }
         private readonly int _maxValue;
+
+        public readonly int Value;
 
         private const int _defaultMaxValue = 64;
 
-        public static ItemCount Min = _min;
+        public static ItemCount Min => _min;
         private static ItemCount _min = new ItemCount(_minValue);
 
         public ItemCount(int value, int maxValue = _defaultMaxValue)
