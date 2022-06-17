@@ -1334,6 +1334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2080803552}
   - component: {fileID: 2080803553}
+  - component: {fileID: 2080803554}
   m_Layer: 5
   m_Name: PlayerInventory
   m_TagString: Untagged
@@ -1376,6 +1377,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slotPrefab: {fileID: 1976345327233142869, guid: f27bc74b5ce9042419748ce0d2f5815e, type: 3}
   _slotParent: {fileID: 2006540205}
+--- !u!225 &2080803554
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080803551}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2102523817 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 153272, guid: 8d75129d226b0954baf09ca99b4d826d, type: 3}

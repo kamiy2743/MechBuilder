@@ -60,9 +60,9 @@ namespace MB
 
             public void CopyMeshAndMaterial(IFieldItem other)
             {
-                _mf.mesh = other.Mesh;
-                _mr.material = other.Material;
-                Transform.localScale = Vector3.one * 0.5f;
+                Transform.localScale = other.Apperance.Scale;
+                _mf.mesh = other.Apperance.MeshFilter.mesh;
+                _mr.material = other.Apperance.MeshRenderer.material;
             }
         }
     }

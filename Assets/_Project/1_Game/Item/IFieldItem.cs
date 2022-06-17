@@ -9,8 +9,7 @@ namespace MB
         GameObject GameObject { get; }
         ItemCollider Collider { get; }
 
-        Mesh Mesh { get; }
-        Material Material { get; }
+        ItemApperance Apperance { get; }
 
         void Initialize(ItemID itemID);
     }

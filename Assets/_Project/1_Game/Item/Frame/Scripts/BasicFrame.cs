@@ -11,11 +11,7 @@ namespace MB
         public GameObject GameObject => this.gameObject;
         public ItemCollider Collider { get; private set; }
 
-        public Mesh Mesh => _mf.mesh;
-        public Material Material => _mr.material;
-
-        private MeshFilter _mf;
-        private MeshRenderer _mr;
+        public ItemApperance Apperance { get; private set; }
 
         public void Initialize(ItemID itemID)
         {
@@ -23,8 +19,7 @@ namespace MB
 
             Collider = GetComponent<ItemCollider>();
 
-            _mf = this.gameObject.GetComponentInSelfOrChildren<MeshFilter>("meshfilter not found");
-            _mr = this.gameObject.GetComponentInSelfOrChildren<MeshRenderer>("meshrenderer not found");
+            Apperance = this.gameObject.GetComponentInSelfOrChildren<ItemApperance>();
         }
     }
 }
