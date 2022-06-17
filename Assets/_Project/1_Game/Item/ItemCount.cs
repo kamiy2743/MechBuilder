@@ -37,12 +37,6 @@ namespace MB
             _value = value;
         }
 
-        public ItemCount(int maxValue = _defaultMaxValue)
-        {
-            _maxValue = maxValue;
-            _value = _minValue;
-        }
-
         public ItemCount Add(ItemCount add)
         {
             return new ItemCount(_value + add._value, _maxValue);
