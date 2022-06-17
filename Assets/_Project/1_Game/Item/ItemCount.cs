@@ -9,7 +9,7 @@ namespace MB
         private const int _minValue = 0;
         private readonly int _maxValue;
 
-        public readonly int Value;
+        private readonly int _value;
 
         private const int _defaultMaxValue = 64;
 
@@ -34,23 +34,23 @@ namespace MB
                 throw new System.Exception("アイテム数が" + _maxValue + "より大きいです");
             }
 
-            Value = value;
+            _value = value;
         }
 
         public ItemCount(int maxValue = _defaultMaxValue)
         {
             _maxValue = maxValue;
-            Value = _minValue;
+            _value = _minValue;
         }
 
         public ItemCount Add(ItemCount add)
         {
-            return new ItemCount(Value + add.Value, _maxValue);
+            return new ItemCount(_value + add._value, _maxValue);
         }
 
         public override string ToString()
         {
-            return Value.ToString();
+            return _value.ToString();
         }
     }
 }
