@@ -7,17 +7,28 @@ namespace MB
 {
     public class PlayerInventory : MonoBehaviour, IStaticAwake
     {
+        [SerializeField] private InventorySlot _slotPrefab;
+        [SerializeField] private Transform _slotParent;
+
         InventoryGrid _grid;
         private IInventoryItem[] _items;
+        private InventorySlot[] _slots;
 
         public void StaticAwake()
         {
             _grid = new InventoryGrid(4, 9);
             _items = new IInventoryItem[_grid.Count];
+            _slots = new InventorySlot[_grid.Count];
 
-            for (int i = 0; i < _items.Length; i++)
+            for (int i = 0; i < _grid.Count; i++)
             {
                 _items[i] = InventoryItem.Empty;
+
+                var slot = Instantiate(_slotPrefab.gameObject, parent: _slotParent).GetComponent<InventorySlot>();
+                _slots[i] = slot;
+
+                slot.SetItemID(_items[i].ID);
+                slot.SetItemCount(_items[i].Count);
             }
         }
 
@@ -37,7 +48,13 @@ namespace MB
                 }
             }
 
-            _items[_grid.ToIndex(row, column)] = item;
+            var index = _grid.ToIndex(row, column);
+            _items[index] = item;
+
+            // TODO どこかで値の変化を監視
+            _slots[index].SetItemID(item.ID);
+            _slots[index].SetItemCount(item.Count);
+
             return true;
         }
 
