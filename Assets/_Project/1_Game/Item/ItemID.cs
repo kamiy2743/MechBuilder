@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace MB
 {
     public class ItemID
@@ -8,7 +10,7 @@ namespace MB
         private readonly int _value;
 
         public static ItemID EmptyID => _emptyID;
-        private static ItemID _emptyID = new ItemID(-999);
+        private static ItemID _emptyID = new ItemID(_minValue);
 
         public ItemID(int value)
         {
@@ -19,6 +21,11 @@ namespace MB
             if (value > _maxValue)
             {
                 throw new System.Exception("ItemIDが" + _maxValue + "より大きいです");
+            }
+
+            if (value == _maxValue)
+            {
+                Debug.LogWarning("ItemID: " + _maxValue + " は空のIDを意味します");
             }
 
             _value = value;
