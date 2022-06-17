@@ -2,20 +2,23 @@ namespace MB
 {
     public class ItemID
     {
-        private const int _min = 0;
-        private const int _max = 64;
+        private const int _minValue = 0;
+        private const int _maxValue = 64;
 
         private readonly int _value;
 
+        public static ItemID EmptyID => _emptyID;
+        private static ItemID _emptyID = new ItemID(-999);
+
         public ItemID(int value)
         {
-            if (value < _min)
+            if (value < _minValue)
             {
-                throw new System.Exception("ItemIDが" + _min + "より小さいです");
+                throw new System.Exception("ItemIDが" + _minValue + "より小さいです");
             }
-            if (value > _max)
+            if (value > _maxValue)
             {
-                throw new System.Exception("ItemIDが" + _max + "より大きいです");
+                throw new System.Exception("ItemIDが" + _maxValue + "より大きいです");
             }
 
             _value = value;
