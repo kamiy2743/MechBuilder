@@ -10,8 +10,13 @@ namespace MB
 
         private Dictionary<string, IFieldItem> _originalItems = new Dictionary<string, IFieldItem>();
 
+        public static OriginalFieldItems Instance => _instance;
+        private static OriginalFieldItems _instance;
+
         public void StaticAwake()
         {
+            _instance = this;
+
             for (int i = 0; i < _config.Prefabs.Length; i++)
             {
                 var prefab = _config.Prefabs[i];
