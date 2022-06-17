@@ -6,11 +6,12 @@ namespace MB
     {
         private const int _minValue = 0;
         private const int _maxValue = 64;
+        private const int _emptyValue = _maxValue;
 
         private readonly int _value;
 
         public static ItemID EmptyID => _emptyID;
-        private static ItemID _emptyID = new ItemID(_minValue);
+        private static ItemID _emptyID = new ItemID(_emptyValue);
 
         public ItemID(int value)
         {
@@ -23,9 +24,9 @@ namespace MB
                 throw new System.Exception("ItemIDが" + _maxValue + "より大きいです");
             }
 
-            if (value == _maxValue)
+            if (value == _emptyValue)
             {
-                Debug.LogWarning("ItemID: " + _maxValue + " は空のIDを意味します");
+                Debug.LogWarning("ItemID: " + _emptyValue + " は空のIDで予約されています");
             }
 
             _value = value;
@@ -33,6 +34,11 @@ namespace MB
 
         public override string ToString()
         {
+            if (_value == _emptyValue)
+            {
+                return "Empty";
+            }
+
             return _value.ToString();
         }
 
