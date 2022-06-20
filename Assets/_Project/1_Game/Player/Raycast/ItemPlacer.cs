@@ -12,10 +12,15 @@ namespace MB
         private ItemID _lastItemID = ItemID.EmptyID;
         private PreviewObject _previewObject = new PreviewObject();
 
+        // TODO タイマー処理ぐらい何とかならんか
+        private bool _isWaiting = false;
+        private float _elapsed = 0;
+
         public void Hit(RaycastHit hit)
         {
             var other = hit.collider.GetComponent<IFieldItem>();
             Preview(hit, other);
+            PlaceItem();
         }
 
         private void Preview(RaycastHit hit, IFieldItem other)
@@ -54,6 +59,34 @@ namespace MB
             }
 
             return point + normal * (originalItemInhand.Collider.Size.x * 0.5f);
+        }
+
+        private void PlaceItem()
+        {
+            if (_isWaiting)
+            {
+                if (_elapsed < 1f)
+                {
+                    _elapsed += Time.deltaTime;
+                    return;
+                }
+                else
+                {
+                    _elapsed = 0;
+                    _isWaiting = false;
+                }
+            }
+
+            if (!InputProvider.Intance.PlaceItem()) return;
+
+            var itemInhand = PlayerInventory.Instance.ItemInHand;
+            if (itemInhand == InventoryItem.Empty) return;
+
+            var position = _previewObject.Transform.position;
+            var rotation = _previewObject.Transform.rotation;
+            OriginalFieldItems.Instance.Instantiate(itemInhand.ID, position, rotation);
+
+            _isWaiting = true;
         }
     }
 }
