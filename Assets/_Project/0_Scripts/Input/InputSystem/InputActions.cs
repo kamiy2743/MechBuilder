@@ -55,6 +55,24 @@ namespace MB
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""91229b26-01e3-42d5-8308-9b5798ee94e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableSnap"",
+                    ""type"": ""Button"",
+                    ""id"": ""e670e455-2d17-4c5b-876e-d3bbe0fca7a3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -231,6 +249,28 @@ namespace MB
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8d5fc38-3f11-4a75-b291-346b144ba7aa"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PlaceItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51f31855-317a-481b-8aa8-4df60b926cd2"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EnableSnap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -821,6 +861,8 @@ namespace MB
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_PlaceItem = m_Player.FindAction("PlaceItem", throwIfNotFound: true);
+            m_Player_EnableSnap = m_Player.FindAction("EnableSnap", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -895,6 +937,8 @@ namespace MB
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_PlaceItem;
+        private readonly InputAction m_Player_EnableSnap;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
@@ -902,6 +946,8 @@ namespace MB
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @PlaceItem => m_Wrapper.m_Player_PlaceItem;
+            public InputAction @EnableSnap => m_Wrapper.m_Player_EnableSnap;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -920,6 +966,12 @@ namespace MB
                     @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @PlaceItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceItem;
+                    @PlaceItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceItem;
+                    @PlaceItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceItem;
+                    @EnableSnap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnableSnap;
+                    @EnableSnap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnableSnap;
+                    @EnableSnap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnableSnap;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -933,6 +985,12 @@ namespace MB
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @PlaceItem.started += instance.OnPlaceItem;
+                    @PlaceItem.performed += instance.OnPlaceItem;
+                    @PlaceItem.canceled += instance.OnPlaceItem;
+                    @EnableSnap.started += instance.OnEnableSnap;
+                    @EnableSnap.performed += instance.OnEnableSnap;
+                    @EnableSnap.canceled += instance.OnEnableSnap;
                 }
             }
         }
@@ -1092,6 +1150,8 @@ namespace MB
             void OnMove(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnPlaceItem(InputAction.CallbackContext context);
+            void OnEnableSnap(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

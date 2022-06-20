@@ -20,5 +20,15 @@ namespace MB
         {
             return _input.Jump();
         }
+
+        public bool PlaceItem()
+        {
+            return _input.PlaceItem();
+        }
+
+        public bool EnableSnap()
+        {
+            return _input.EnableSnap();
+        }
     }
 }

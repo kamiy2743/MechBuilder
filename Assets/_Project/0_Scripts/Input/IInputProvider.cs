@@ -6,5 +6,8 @@ namespace MB
     {
         Vector3 MoveVector();
         bool Jump();
+
+        bool PlaceItem();
+        bool EnableSnap();
     }
 }
