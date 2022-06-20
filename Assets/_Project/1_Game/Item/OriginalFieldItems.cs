@@ -41,13 +41,13 @@ namespace MB
             Instantiate(new ItemID(0));
         }
 
-        public IFieldItem Instantiate(ItemID itemID, Transform parent = null)
+        public IFieldItem Instantiate(ItemID itemID, Vector3 position = default, Quaternion rotation = default, Transform parent = null)
         {
             var originalItem = Get(itemID);
             var p = parent ??= this.transform.parent;
 
             var item =
-                Instantiate(originalItem.GameObject, parent: p)
+                Instantiate(originalItem.GameObject, position, rotation, parent)
                 .GetComponent<IFieldItem>();
 
             item.Initialize(itemID);
