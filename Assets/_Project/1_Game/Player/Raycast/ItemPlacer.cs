@@ -44,8 +44,7 @@ namespace MB
 
             var point = Vector3.zero;
 
-            // TODO InputActionに追加
-            if (Keyboard.current.leftCtrlKey.isPressed)
+            if (InputProvider.Intance.EnableSnap())
             {
                 point = other.Collider.CalcNearestSnapPoint(hitPoint);
             }
