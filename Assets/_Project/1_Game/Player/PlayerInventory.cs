@@ -37,6 +37,9 @@ namespace MB
                 slot.SetItemID(_items[i].ID);
                 slot.SetItemCount(_items[i].Count);
             }
+
+            // TODO デバッグ用
+            Set(0, 0, new InventoryItem(new ItemID(0), "test", new ItemCount(0), default));
         }
 
         public IInventoryItem Get(int row, int column)
