@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MB
 {
-    public class CoreUnit : MonoBehaviour, IFieldItem
+    public class CoreUnit : MonoBehaviour, IFieldItem, IInteractable
     {
         public ItemID ID { get; private set; }
 
@@ -20,6 +20,11 @@ namespace MB
             Collider = GetComponent<ItemCollider>();
 
             Apperance = this.gameObject.GetComponentInSelfOrChildren<ItemApperance>();
+        }
+
+        public void Interact()
+        {
+            Debug.Log("interact");
         }
     }
 }
