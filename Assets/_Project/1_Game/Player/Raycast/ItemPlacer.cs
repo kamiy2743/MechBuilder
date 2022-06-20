@@ -39,10 +39,22 @@ namespace MB
         private Vector3 CalcPreviewPosition(RaycastHit hit, ItemID itemIDInHand, IFieldItem other)
         {
             var normal = hit.normal;
-            var point = hit.point;
+            var hitPoint = hit.point;
             var originalItemInhand = OriginalFieldItems.Instance.GetOriginalData(itemIDInHand);
 
-            return point + normal * (originalItemInhand.Collider.Size.x * other.Collider.Size.x);
+            var point = Vector3.zero;
+
+            // TODO InputActionに追加
+            if (Keyboard.current.leftCtrlKey.isPressed)
+            {
+                point = other.Collider.CalcNearestSnapPoint(hitPoint);
+            }
+            else
+            {
+                point = hitPoint;
+            }
+
+            return point + normal * (originalItemInhand.Collider.Size.x * 0.5f);
         }
     }
 }
