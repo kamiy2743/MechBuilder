@@ -23,17 +23,28 @@ namespace MB
         }
 
         // 毎フレーム呼ぶことが想定されるのでできるだけ高速化したい
-        public IReadOnlyList<Vector3> CalcSnapPoints()
+        // TODO _snapUnit以下で計算を終了すればもっと早くなる
+        public Vector3 CalcNearestSnapPoint(Vector3 target)
         {
             var points = new List<Vector3>(_localSnapPoints.Count);
             var position = transform.position;
 
+            var distance = float.PositiveInfinity;
+            var nearest = Vector3.zero;
+
             foreach (var localPoint in _localSnapPoints)
             {
-                points.Add(position + localPoint);
+                var globalPoint = localPoint + position;
+                var d2 = Vector3.SqrMagnitude(globalPoint - target);
+
+                if (d2 < distance)
+                {
+                    distance = d2;
+                    nearest = globalPoint;
+                }
             }
 
-            return points;
+            return nearest;
         }
 
         private List<Vector3> CalcLocalSnapPoints()
