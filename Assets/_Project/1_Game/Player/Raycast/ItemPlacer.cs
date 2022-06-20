@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace MB
 {
@@ -28,14 +29,20 @@ namespace MB
                 _previewObject.CopyMeshAndMaterial(itemInhand.ID);
             }
 
-            var normal = hit.normal;
-            var point = hit.point;
             var otherRotation = hit.collider.transform.rotation;
 
-            var originalItemInhand = OriginalFieldItems.Instance.GetOriginalData(itemInhand.ID);
             _previewObject.SetVisible(true);
-            _previewObject.Transform.position = point + normal * (originalItemInhand.Collider.Size.x * other.Collider.Size.x);
+            _previewObject.Transform.position = CalcPreviewPosition(hit, itemInhand.ID, other);
             _previewObject.Transform.rotation = otherRotation;
+        }
+
+        private Vector3 CalcPreviewPosition(RaycastHit hit, ItemID itemIDInHand, IFieldItem other)
+        {
+            var normal = hit.normal;
+            var point = hit.point;
+            var originalItemInhand = OriginalFieldItems.Instance.GetOriginalData(itemIDInHand);
+
+            return point + normal * (originalItemInhand.Collider.Size.x * other.Collider.Size.x);
         }
     }
 }
