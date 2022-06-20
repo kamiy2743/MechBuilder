@@ -16,6 +16,7 @@ namespace MB
             public PreviewObject()
             {
                 var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                go.name = "PreviewObject";
                 MonoBehaviour.Destroy(go.GetComponent<BoxCollider>());
 
                 Transform = go.transform;
