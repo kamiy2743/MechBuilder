@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MB
 {
-    public partial class ItemPlacer
+    public partial class PlaceItemProcessor
     {
         private class PreviewObject
         {

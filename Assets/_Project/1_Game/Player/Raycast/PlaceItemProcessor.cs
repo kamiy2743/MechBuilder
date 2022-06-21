@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace MB
 {
-    public partial class ItemPlacer : IRaycasterStateProcessor
+    public partial class PlaceItemProcessor : IRaycasterStateProcessor
     {
         public int LayerMask { get; private set; } = (1 << UnityEngine.LayerMask.NameToLayer("Item"));
 

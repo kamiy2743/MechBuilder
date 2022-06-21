@@ -14,8 +14,8 @@ namespace MB
 
         public void StaticAwake()
         {
-            _processors[RaycasterState.PlaceItem] = new ItemPlacer();
-            _processors[RaycasterState.InteractItem] = new ItemInteractor();
+            _processors[RaycasterState.PlaceItem] = new PlaceItemProcessor();
+            _processors[RaycasterState.InteractItem] = new InteractItemProcessor();
             AddStates(
                 RaycasterState.PlaceItem,
                 RaycasterState.InteractItem);

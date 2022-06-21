@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MB
 {
-    public class ItemInteractor : IRaycasterStateProcessor
+    public class InteractItemProcessor : IRaycasterStateProcessor
     {
         public int LayerMask { get; private set; } = (1 << UnityEngine.LayerMask.NameToLayer("Item"));
 
