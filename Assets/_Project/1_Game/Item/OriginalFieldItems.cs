@@ -38,7 +38,12 @@ namespace MB
                 Set(itemID, originalItem);
             }
 
-            Instantiate(new ItemID(0));
+            float l = 0;
+            foreach (var item in _originalItems.Values)
+            {
+                Instantiate(item.ID, new Vector3(l + item.Collider.Size.x * 2, item.Collider.Size.y, 0));
+                l += item.Collider.Size.x * 2;
+            }
         }
 
         public IFieldItem Instantiate(ItemID itemID, Vector3 position = default, Quaternion rotation = default, Transform parent = null)
