@@ -17,3 +17,5 @@ MonoBehaviour:
     GameObject: {fileID: 8646120657889050123, guid: b54e03a7768648a4dba265713ed6c7da, type: 3}
   - Name: "\u767A\u5C55\u30D5\u30EC\u30FC\u30E0"
     GameObject: {fileID: 8646120657889050123, guid: b8b2dabd4953e0042a5db6c488654773, type: 3}
+  - Name: "\u30B3\u30A2\u30E6\u30CB\u30C3\u30C8"
+    GameObject: {fileID: 3931617384042349324, guid: b56e4d3adce0cd4438ba00cde6033e35, type: 3}
