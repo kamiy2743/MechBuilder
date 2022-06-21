@@ -11,7 +11,12 @@ namespace MB
         public void Hit(RaycastHit hit)
         {
             var interactable = hit.collider.GetComponent<IInteractable>();
-            interactable?.Interact();
+            if (interactable == null) return;
+
+            if (InputProvider.Intance.Interact())
+            {
+                interactable.Interact();
+            }
         }
     }
 }
