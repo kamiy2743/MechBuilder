@@ -9,38 +9,58 @@ namespace MB
         [SerializeField] private Transform _mainCamera;
         [SerializeField] private float _maxDistance;
 
-        private Dictionary<RaycasterState, IRaycasterStateProcessor> _processores = new Dictionary<RaycasterState, IRaycasterStateProcessor>();
-        private IRaycasterStateProcessor _currentProcessor;
+        private Dictionary<RaycasterState, IRaycasterStateProcessor> _processors = new Dictionary<RaycasterState, IRaycasterStateProcessor>();
+        private List<IRaycasterStateProcessor> _currentProcessors = new List<IRaycasterStateProcessor>();
 
         public void StaticAwake()
         {
-            _processores[RaycasterState.PlaceItem] = new ItemPlacer();
-            SetState(default);
+            _processors[RaycasterState.PlaceItem] = new ItemPlacer();
+            _processors[RaycasterState.InteractItem] = new ItemInteractor();
+            AddStates(
+                RaycasterState.PlaceItem,
+                RaycasterState.InteractItem);
         }
 
-        private void SetState(RaycasterState state)
+        private void AddStates(params RaycasterState[] states)
         {
-            _currentProcessor = _processores[state];
+            foreach (var state in states)
+            {
+                var processor = _processors[state];
+                _currentProcessors.Add(processor);
+            }
+        }
+
+        private void RemoveStates(params RaycasterState[] states)
+        {
+            foreach (var state in states)
+            {
+                var processor = _processors[state];
+                _currentProcessors.Remove(processor);
+            }
         }
 
         void Update()
         {
             var start = _mainCamera.position;
             var direction = _mainCamera.TransformDirection(Vector3.forward);
-            var layerMask = _currentProcessor.LayerMask;
 
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(start, direction, out RaycastHit hit, _maxDistance, layerMask))
+            foreach (var processor in _currentProcessors)
             {
-                Debug.DrawRay(start, direction * hit.distance, Color.red);
-            }
-            else
-            {
-                Debug.DrawRay(start, direction * _maxDistance, Color.yellow);
-                return;
-            }
+                var layerMask = processor.LayerMask;
 
-            _currentProcessor.Hit(hit);
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(start, direction, out RaycastHit hit, _maxDistance, layerMask))
+                {
+                    Debug.DrawRay(start, direction * hit.distance, Color.red);
+                }
+                else
+                {
+                    Debug.DrawRay(start, direction * _maxDistance, Color.yellow);
+                    return;
+                }
+
+                processor.Hit(hit);
+            }
         }
     }
 }
