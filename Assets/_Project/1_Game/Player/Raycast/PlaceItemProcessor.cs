@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UniRx;
 
 namespace MB
 {
@@ -12,15 +12,25 @@ namespace MB
         private ItemID _lastItemID = ItemID.EmptyID;
         private PreviewObject _previewObject = new PreviewObject();
 
-        // TODO タイマー処理ぐらい何とかならんか
-        private bool _isWaiting = false;
-        private float _elapsed = 0;
+        // TODO Unitの調査
+        private Subject<Unit> _observable = new Subject<Unit>();
+
+        public PlaceItemProcessor()
+        {
+            _observable
+                .Where(_ => InputProvider.Intance.PlaceItem())
+                .ThrottleFirst(System.TimeSpan.FromSeconds(0.5f))
+                .Subscribe(_ =>
+                {
+                    PlaceItem();
+                });
+        }
 
         public void Hit(RaycastHit hit)
         {
             var other = hit.collider.GetComponent<IFieldItem>();
             Preview(hit, other);
-            PlaceItem();
+            _observable.OnNext(new Unit());
         }
 
         private void Preview(RaycastHit hit, IFieldItem other)
@@ -63,30 +73,12 @@ namespace MB
 
         private void PlaceItem()
         {
-            if (_isWaiting)
-            {
-                if (_elapsed < 1f)
-                {
-                    _elapsed += Time.deltaTime;
-                    return;
-                }
-                else
-                {
-                    _elapsed = 0;
-                    _isWaiting = false;
-                }
-            }
-
-            if (!InputProvider.Intance.PlaceItem()) return;
-
             var itemInhand = PlayerInventory.Instance.ItemInHand;
             if (itemInhand == InventoryItem.Empty) return;
 
             var position = _previewObject.Transform.position;
             var rotation = _previewObject.Transform.rotation;
             OriginalFieldItems.Instance.Instantiate(itemInhand.ID, position, rotation);
-
-            _isWaiting = true;
         }
     }
 }
