@@ -30,5 +30,10 @@ namespace MB
         {
             return _input.EnableSnap();
         }
+
+        public bool Interact()
+        {
+            return _input.Interact();
+        }
     }
 }

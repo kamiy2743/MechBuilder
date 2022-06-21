@@ -9,5 +9,7 @@ namespace MB
 
         bool PlaceItem();
         bool EnableSnap();
+
+        bool Interact();
     }
 }

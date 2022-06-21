@@ -34,5 +34,10 @@ namespace MB
         {
             return _actions.Player.EnableSnap.ReadValue<float>() > 0;
         }
+
+        public bool Interact()
+        {
+            return _actions.Player.Interact.ReadValue<float>() > 0;
+        }
     }
 }

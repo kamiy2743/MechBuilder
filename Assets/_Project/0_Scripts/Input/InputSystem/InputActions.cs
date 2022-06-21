@@ -73,6 +73,15 @@ namespace MB
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c8a9d09-7dc6-4add-824b-86d87c028a42"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,17 @@ namespace MB
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""EnableSnap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""863ac06d-88e1-41f6-8a82-f849059d4119"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -863,6 +883,7 @@ namespace MB
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_PlaceItem = m_Player.FindAction("PlaceItem", throwIfNotFound: true);
             m_Player_EnableSnap = m_Player.FindAction("EnableSnap", throwIfNotFound: true);
+            m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -939,6 +960,7 @@ namespace MB
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_PlaceItem;
         private readonly InputAction m_Player_EnableSnap;
+        private readonly InputAction m_Player_Interact;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
@@ -948,6 +970,7 @@ namespace MB
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @PlaceItem => m_Wrapper.m_Player_PlaceItem;
             public InputAction @EnableSnap => m_Wrapper.m_Player_EnableSnap;
+            public InputAction @Interact => m_Wrapper.m_Player_Interact;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -972,6 +995,9 @@ namespace MB
                     @EnableSnap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnableSnap;
                     @EnableSnap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnableSnap;
                     @EnableSnap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnableSnap;
+                    @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                    @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                    @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -991,6 +1017,9 @@ namespace MB
                     @EnableSnap.started += instance.OnEnableSnap;
                     @EnableSnap.performed += instance.OnEnableSnap;
                     @EnableSnap.canceled += instance.OnEnableSnap;
+                    @Interact.started += instance.OnInteract;
+                    @Interact.performed += instance.OnInteract;
+                    @Interact.canceled += instance.OnInteract;
                 }
             }
         }
@@ -1152,6 +1181,7 @@ namespace MB
             void OnJump(InputAction.CallbackContext context);
             void OnPlaceItem(InputAction.CallbackContext context);
             void OnEnableSnap(InputAction.CallbackContext context);
+            void OnInteract(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
